@@ -1,14 +1,10 @@
 // import 'dart:html';
 import 'package:meals_app/ScopedModel/main.dart';
-import 'package:meals_app/screens/Home_page.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 class LoginPage extends StatefulWidget {
-  final Function login;
-
-  const LoginPage({Key key, this.login}) : super(key: key);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -17,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   Map<String, dynamic> _userData = {
     'email': null,
     'password': null,
-    // 'acceptTerms': false
+    'acceptTerms': false
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DecorationImage _backgroundDecoration() {
@@ -27,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _logoImage() {
     return Container(
-      height: 75,
+      height: 150,
       child: Image.asset('assets/logo.png'),
     );
   }
@@ -38,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         if (value.isEmpty ||
             !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 .hasMatch(value)) {
-          return 'Enter A valid Username  ';
+          return 'Enter A valid Username or Licence number ';
         }
         return null;
       },
@@ -60,7 +56,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _passwordField() {
     return TextFormField(
-      obscureText: false,
       validator: (value) {
         if (value.isEmpty || value.length <= 6) {
           return 'passsword required and not to be less than six characters';
@@ -82,43 +77,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _singIn(
-      Function login, BuildContext context, String errMsg, String doneMsg) {
+  void _singIn(Function login) {
     if (!_formKey.currentState.validate()) {
       return;
     }
-    //  print('${_userData['email']}' + '${_userData['password']}');
+    print('${_userData['email']}' + '${_userData['password']}');
+    login(_userData['email'], _userData['password']);
     _formKey.currentState.save();
-    login(_userData['email'], _userData['password']).then((bool success) {
-      if (success) {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text(doneMsg)));
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text(errMsg)));
-      }
-    });
-    // Navigator.push(context, MaterialPageRoute(builder: (context) {
-    //   return HomePage();
-    // }));
+    Navigator.pushReplacementNamed(context, '/home');
 
     //IMPLEMENT LOGIN FUCTION AND PUSH PAGE
-  }
-
-  Widget _creatAccountButton() {
-    return ScopedModelDescendant<MainModel>(
-      builder: (BuildContext context, Widget child, MainModel model) {
-        return model.isLoading
-            ? Center(child: CircularProgressIndicator())
-            : RaisedButton(
-                // color: Theme.of(context).accentColor,
-                onPressed: () {
-                  _singIn(model.logIn, context, model.doneMsg, model.errMsg);
-                },
-                child: Text('Create'),
-                color: Colors.white24,
-              );
-      },
-    );
   }
 
   @override
@@ -138,9 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     _logoImage(),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Container(
                         width: targetWidth,
                         child: Column(
@@ -152,11 +117,14 @@ class _LoginPageState extends State<LoginPage> {
                             _passwordField(),
                           ],
                         )),
-                    _creatAccountButton()
-                    // ScopedModelDescendant<MainModel>(builder:
-                    //     (BuildContext context, Widget child, MainModel model) {
-                    //   return RaisedButton();
-                    // })
+                    ScopedModelDescendant<MainModel>(builder:
+                        (BuildContext context, Widget child, MainModel model) {
+                      return RaisedButton(
+                        onPressed: () => _singIn(model.logIn),
+                        child: Text('Create'),
+                        color: Colors.white24,
+                      );
+                    })
                   ],
                 ))),
       ),
