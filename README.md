@@ -1,6 +1,6 @@
-# meals_app
+# Salama App
 
-A new Flutter project.
+A new Accidenr statement reporting  Flutter project.
 
 ## Getting Started
 
