@@ -9,6 +9,7 @@ import './screens/PartBPage.dart';
 import './screens/ReportStatusPage.dart';
 import './screens/ReviewPage.dart';
 import 'package:scoped_model/scoped_model.dart';
+import './screens/SignUp.dart';
 
 //import '';
 void main() {
@@ -25,6 +26,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              centerTitle: true,
+              color: Colors.green,
+              actionsIconTheme: IconThemeData(color: Colors.white),
+            ),
             // This is the theme of your application.
             //
             // Try running your application with "flutter run". You'll see the
@@ -50,8 +56,13 @@ class MyApp extends StatelessWidget {
             '/location': (context) => LocationPage(),
             '/Camera': (context) => CameraPage(),
             '/review': (context) => ReviewPage(),
+            '/sigUp': (context) => SignUpPage()
           },
-          home: LoginPage(),
+          home: ScopedModelDescendant<MainModel>(
+              builder: (BuildContext context, Widget child, MainModel model) {
+            model.init();
+            return model.isLoggedIn ? HomePage() : SignUpPage();
+          }),
           onUnknownRoute: (RouteSettings settings) {
             return MaterialPageRoute(
               builder: (BuildContext context) {

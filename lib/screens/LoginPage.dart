@@ -4,6 +4,7 @@ import 'package:meals_app/screens/Home_page.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../Models/userModel.dart';
 
 class LoginPage extends StatefulWidget {
   final Function login;
@@ -83,20 +84,44 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _singIn(
-      Function login, BuildContext context, String errMsg, String doneMsg) {
+    Function login,
+    bool isLoggedIn,
+    user,
+    String error,
+    String doneMsg,
+  ) async {
     if (!_formKey.currentState.validate()) {
       return;
     }
     //  print('${_userData['email']}' + '${_userData['password']}');
     _formKey.currentState.save();
-    login(_userData['email'], _userData['password']).then((bool success) {
-      if (success) {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text(doneMsg)));
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text(errMsg)));
-      }
-    });
+    print(isLoggedIn);
+
+    await login(_userData['email'], _userData['password']);
+    print(isLoggedIn);
+    print(user['email']);
+    //print(isDone);
+    if (isLoggedIn) {
+      print('done msg in login[page]: ' + doneMsg);
+      Navigator.pushReplacementNamed(context, '/home');
+    }
+    // else {
+    // Scaffold.of(context).showSnackBar(SnackBar(content: Text('doneMsg')));
+    //   print('notdone msg : ' + errMsg);
+    //   }
+
+    // print('not success');
+    //});
+    // .then((bool success) {
+
+    //print('err msg : ' + errMsg);
+    // if (success) {
+    //   Scaffold.of(context).showSnackBar(SnackBar(content: Text(doneMsg)));
+    //   Navigator.pushReplacementNamed(context, '/home');
+    // } else {
+    //   Scaffold.of(context).showSnackBar(SnackBar(content: Text(errMsg)));
+    // }}
+    // });
     // Navigator.push(context, MaterialPageRoute(builder: (context) {
     //   return HomePage();
     // }));
@@ -112,9 +137,14 @@ class _LoginPageState extends State<LoginPage> {
             : RaisedButton(
                 // color: Theme.of(context).accentColor,
                 onPressed: () {
-                  _singIn(model.logIn, context, model.doneMsg, model.errMsg);
+                  print('first is logedIn ' + model.isLoggedIn.toString());
+                  //print(model.isDone);
+                  _singIn(model.logIn, model.isLoggedIn, model.user,
+                      model.error, model.doneMssg);
+                  print(model.isLoggedIn.toString());
                 },
-                child: Text('Create'),
+
+                child: Text('login'),
                 color: Colors.white24,
               );
       },

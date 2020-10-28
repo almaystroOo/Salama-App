@@ -4,12 +4,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   Map<String, dynamic> _userData = {
     'email': null,
     'password': null,
@@ -77,14 +77,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _singIn(Function login) {
+  void _singUp(Function createAccount, bool isCreated) async {
     if (!_formKey.currentState.validate()) {
       return;
     }
-    print('${_userData['email']}' + '${_userData['password']}');
-    login(_userData['email'], _userData['password']);
     _formKey.currentState.save();
+    print('${_userData['email']}' + '${_userData['password']}');
+    await createAccount(_userData['email'], _userData['password']);
+    print(isCreated);
+    // if (isCreated) {
     Navigator.pushReplacementNamed(context, '/home');
+    // }
 
     //IMPLEMENT LOGIN FUCTION AND PUSH PAGE
   }
@@ -120,8 +123,9 @@ class _LoginPageState extends State<LoginPage> {
                     ScopedModelDescendant<MainModel>(builder:
                         (BuildContext context, Widget child, MainModel model) {
                       return RaisedButton(
-                        onPressed: () => _singIn(model.logIn),
-                        child: Text('Create'),
+                        onPressed: () =>
+                            _singUp(model.createAccount, model.isCreated),
+                        child: Text('SignUp'),
                         color: Colors.white24,
                       );
                     })
