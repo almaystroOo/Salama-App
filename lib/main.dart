@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/ScopedModel/main.dart';
+import 'package:meals_app/screens/SplashScreen.dart';
 import './screens/Home_page.dart';
 import './screens/CameraPage.dart';
 import './screens/LocationPage.dart';
@@ -10,13 +11,34 @@ import './screens/ReportStatusPage.dart';
 import './screens/ReviewPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import './screens/SignUp.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:camera/camera.dart';
+//import 'package:flutter/material.dart';
+import 'package:path/path.dart' show join;
+import 'package:path_provider/path_provider.dart';
 
 //import '';
-void main() {
-  runApp(MyApp());
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+// Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+// Get a specific camera from the list of available cameras.
+  final firstCamera = cameras.first;
+  runApp(MyApp(
+    firstCamera: firstCamera,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final firstCamera;
+
+  const MyApp({Key key, this.firstCamera}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -54,14 +76,14 @@ class MyApp extends StatelessWidget {
             '/partA': (context) => PartAPage(),
             '/partB': (context) => PartBPage(),
             '/location': (context) => LocationPage(),
-            '/Camera': (context) => CameraPage(),
+            '/Camera': (context) => TakePictureScreen(camera: firstCamera),
             '/review': (context) => ReviewPage(),
             '/sigUp': (context) => SignUpPage()
           },
           home: ScopedModelDescendant<MainModel>(
               builder: (BuildContext context, Widget child, MainModel model) {
             model.init();
-            return model.isLoggedIn ? HomePage() : SignUpPage();
+            return model.isLoggedIn ? HomePage() : SplashScreen();
           }),
           onUnknownRoute: (RouteSettings settings) {
             return MaterialPageRoute(

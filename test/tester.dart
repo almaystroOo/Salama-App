@@ -1,26 +1,25 @@
-import 'package:appwrite/appwrite.dart';
+// import 'package:flutter/foundation.dart';
+// void main() {
+//   var _myMap = {
+//     "id": "jay",
+//     "password": "1234",
+//     "name": "Jay Tillu",
+//   };
+//   print("************ Before adding data in Map ************");
+//   print(_myMap);
 
-void main() {
-  // Init SDK
-  Client client = Client();
-  Account account = Account(client);
+//   //  Map<String, dynamic> get getData {
+//   //   return _myMap;
+//   // }
+//   // Adding value to Map
 
-  client
-          .setEndpoint('http://192.168.1.76/v1') // Your API Endpoint
-          .setProject('5f9018d83a0a0') // Your project ID
-      ;
+//   _myMap["country"] = "india";
+//   print("************ After adding data in Map ************");
+//   print(_myMap);
+// }
 
-  Future result = account.create(
-    email: 'ahmed@gmail.com',
-    password: 'pass',
-  );
-
-  result.then((response) {
-    print(response);
-    //response = responser;
-  }).catchError((error) {
-    print(error.response);
-  });
-}
-// authedUser = User(email: email, password: password);
-// print(authedUser);
+// // Output
+// // ************ Before adding data in Map ************
+// // {id: jay, password: 1234, name: Jay Tillu}
+// // ************ After adding data in Map ************
+// // {id: jay, password: 1234, name: Jay Tillu, country: india}

@@ -24,7 +24,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Accidents Statement '),
         centerTitle: true,
-        actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
+        actions: [
+          ScopedModelDescendant<MainModel>(
+              builder: (BuildContext context, Widget child, MainModel model) {
+            return IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () async {
+                  await model.logout();
+                  Navigator.pushReplacementNamed(context, '/login');
+                });
+          })
+        ],
       ),
       backgroundColor: Colors.white,
       body: Container(

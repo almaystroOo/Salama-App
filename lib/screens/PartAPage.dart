@@ -58,7 +58,7 @@ class _PartAPageState extends State<PartAPage> {
       onSaved: (value) {
         print('Phone Number =' + '$value');
         setState(() {
-          _partAData['Phone Number'] = value;
+          _partAData['PhoneNumber'] = value;
           //   print(_partAData['Phone Number'] + 'Phone Number /Phone Number');
         });
       },
@@ -82,7 +82,7 @@ class _PartAPageState extends State<PartAPage> {
       onSaved: (value) {
         print('License Number =' + '$value');
         setState(() {
-          _partAData['License Number'] = value;
+          _partAData['LicenseNumber'] = value;
           //   print(_partAData['Phone Number'] + 'Phone Number /Phone Number');
         });
       },
@@ -106,7 +106,7 @@ class _PartAPageState extends State<PartAPage> {
       onSaved: (value) {
         print('Car Number =' + '$value');
         setState(() {
-          _partAData['Car Number'] = value;
+          _partAData['CarNumber'] = value;
           //   print(_partAData['Car Number'] + 'Car Number /Car Number');
         });
       },
@@ -144,12 +144,16 @@ class _PartAPageState extends State<PartAPage> {
   //         fillColor: Colors.white24),
   //   );
   // }
-  _nextButton() {
+  _nextButton(Function addStatementPartA, dynamic getData) {
     if (!_formKey.currentState.validate()) {
       return;
     }
     //  print('${_userData['email']}' + '${_userData['password']}');
     _formKey.currentState.save();
+    addStatementPartA(_partAData['Name'], _partAData['LicenseNumber'],
+        _partAData['PhoneNumber'], _partAData['CarNumber'], _partAData['Date']);
+    print(getData);
+    Navigator.pushReplacementNamed(context, '/partB');
   }
 
   DecorationImage _backgroundDecoration() {
@@ -214,6 +218,9 @@ class _PartAPageState extends State<PartAPage> {
                               color: Colors.blue,
                               child: Text('Next'),
                               onPressed: () {
+                                _nextButton(
+                                    model.addStatementPartA, model.getData);
+
                                 // Navigator.push(
                                 //   context,
                                 //   MaterialPageRoute(

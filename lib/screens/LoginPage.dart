@@ -86,8 +86,9 @@ class _LoginPageState extends State<LoginPage> {
   void _singIn(
     Function login,
     bool isLoggedIn,
-    user,
-    String error,
+    bool isLoading,
+    // String userId,
+    String userId,
     String doneMsg,
   ) async {
     if (!_formKey.currentState.validate()) {
@@ -96,15 +97,15 @@ class _LoginPageState extends State<LoginPage> {
     //  print('${_userData['email']}' + '${_userData['password']}');
     _formKey.currentState.save();
     print(isLoggedIn);
-
+    print('print first is loading ' + '$isLoading');
     await login(_userData['email'], _userData['password']);
-    print(isLoggedIn);
-    print(user['email']);
-    //print(isDone);
-    if (isLoggedIn) {
-      print('done msg in login[page]: ' + doneMsg);
-      Navigator.pushReplacementNamed(context, '/home');
-    }
+    print('second is logged :' + '"$isLoggedIn');
+    //print('User id :' + userId);
+    // print(isDone);
+    // if (isLoggedIn) {
+    // print('done msg in login[page]: ' + doneMsg);
+    Navigator.pushReplacementNamed(context, '/home');
+    // }
     // else {
     // Scaffold.of(context).showSnackBar(SnackBar(content: Text('doneMsg')));
     //   print('notdone msg : ' + errMsg);
@@ -139,8 +140,8 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   print('first is logedIn ' + model.isLoggedIn.toString());
                   //print(model.isDone);
-                  _singIn(model.logIn, model.isLoggedIn, model.user,
-                      model.error, model.doneMssg);
+                  _singIn(model.logIn, model.isLoading, model.isLoggedIn,
+                      model.userId, model.doneMssg);
                   print(model.isLoggedIn.toString());
                 },
 
@@ -158,8 +159,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(
-        image: _backgroundDecoration(),
-      ),
+          // image: _backgroundDecoration(),
+          ),
       child: Center(
         child: SingleChildScrollView(
             padding: EdgeInsets.all(10),
