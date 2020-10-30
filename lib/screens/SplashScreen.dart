@@ -26,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 35,
                 ),
                 SpinKitFadingCircle(
+                  //controller: AnimationController(vsync: null),
                   duration: Duration(seconds: 600),
                   color: Colors.white,
                 ),
@@ -34,7 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 Text(
                   'Salama App, your way to a quick statment reporting ',
-                  style: Theme.of(context).textTheme.caption,
+                  style: TextStyle(
+                    fontStyle: FontStyle.normal,
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
                 )
               ],
             ),
