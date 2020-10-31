@@ -13,12 +13,12 @@ import 'package:scoped_model/scoped_model.dart';
 import './screens/SignUp.dart';
 import 'dart:async';
 import 'dart:io';
-
+import './screens/preCamera.dart';
 import 'package:camera/camera.dart';
 //import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
-
+import './screens/submitScreen.dart';
 //import '';
 
 Future<void> main() async {
@@ -78,12 +78,14 @@ class MyApp extends StatelessWidget {
             '/location': (context) => LocationPage(),
             '/Camera': (context) => TakePictureScreen(camera: firstCamera),
             '/review': (context) => ReviewPage(),
-            '/sigUp': (context) => SignUpPage()
+            '/sigUp': (context) => SignUpPage(),
+            '/preCamera': (context) => PreCamera(),
+            '/submit': (context) => SubmitPage(),
           },
           home: ScopedModelDescendant<MainModel>(
               builder: (BuildContext context, Widget child, MainModel model) {
             model.init();
-            return model.isLoggedIn ? HomePage() : SplashScreen();
+            return model.isLoggedIn ? HomePage() : SubmitPage();
           }),
           onUnknownRoute: (RouteSettings settings) {
             return MaterialPageRoute(

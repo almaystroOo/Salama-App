@@ -39,8 +39,8 @@ class _LocationPageState extends State<LocationPage> {
           dropdownValue = newValue;
         });
       },
-      items: <String>['أمدرمان', 'بحري'].map((String value) {
-        return DropdownMenuItem<String>(child: Text(value));
+      items: <String>['الخرطوم', 'بحري', 'أمدرمان'].map((String value) {
+        return DropdownMenuItem<String>(value: value, child: Text(value));
       }).toList(),
 
       //onChanged: null
@@ -64,8 +64,8 @@ class _LocationPageState extends State<LocationPage> {
       },
       decoration: InputDecoration(
           //  icon: Icon(Icons.verified_user),
-          labelText: 'Name :',
-          hintText: 'Enter your Name ',
+          labelText: 'city :',
+          hintText: ' Enter city ',
           filled: true,
           fillColor: Colors.white24),
     );
@@ -88,8 +88,8 @@ class _LocationPageState extends State<LocationPage> {
       },
       decoration: InputDecoration(
           //   icon: Icon(Icons.verified_user),
-          labelText: 'Phone Number :',
-          hintText: 'Enter your Phone Number ',
+          labelText: 'locality :',
+          hintText: 'Enter the locality ',
           filled: true,
           fillColor: Colors.white24),
     );
@@ -112,8 +112,8 @@ class _LocationPageState extends State<LocationPage> {
       },
       decoration: InputDecoration(
           //   icon: Icon(Icons.verified_user),
-          labelText: 'License Number :',
-          hintText: 'Enter your License Number ',
+          labelText: 'first street  Number :',
+          hintText: 'Enter the street Number ',
           filled: true,
           fillColor: Colors.white24),
     );
@@ -136,8 +136,8 @@ class _LocationPageState extends State<LocationPage> {
       },
       decoration: InputDecoration(
           //   icon: Icon(Icons.verified_user),
-          labelText: 'Car Number :',
-          hintText: 'Enter your Car Number ',
+          labelText: 'second street  Number :',
+          hintText: 'Enter your the second street  Number ',
           filled: true,
           fillColor: Colors.white24),
     );
@@ -227,7 +227,7 @@ class _LocationPageState extends State<LocationPage> {
                                   _phoneNumberField(),
                                   _licenseNumberField(),
                                   _carNumberField(),
-                                  _cityDropDown(),
+                                  // _cityDropDown(),
                                 ],
                               )),
                           ScopedModelDescendant<MainModel>(builder:
@@ -245,7 +245,7 @@ class _LocationPageState extends State<LocationPage> {
                               onPressed: () {
                                 print(model.getData);
                                 Navigator.pushReplacementNamed(
-                                    context, '/Camera');
+                                    context, '/preCamera');
                                 // _nextButton(
                                 //     model.addStatementPartA, model.getData);
 

@@ -136,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
         return model.isLoading
             ? Center(child: CircularProgressIndicator())
             : RaisedButton(
+                splashColor: Colors.white,
                 // color: Theme.of(context).accentColor,
                 onPressed: () {
                   print('first is logedIn ' + model.isLoggedIn.toString());
@@ -158,9 +159,11 @@ class _LoginPageState extends State<LoginPage> {
     final targetWidth = width > 550.0 ? 500.0 : width * 0.98;
     return Scaffold(
         body: Container(
+      // color: Colors.green,
       decoration: BoxDecoration(
-          // image: _backgroundDecoration(),
-          ),
+        color: Colors.green,
+        // image: _backgroundDecoration(),
+      ),
       child: Center(
         child: SingleChildScrollView(
             padding: EdgeInsets.all(10),
@@ -183,6 +186,9 @@ class _LoginPageState extends State<LoginPage> {
                             _passwordField(),
                           ],
                         )),
+                    SizedBox(
+                      height: 10,
+                    ),
                     _creatAccountButton()
                     // ScopedModelDescendant<MainModel>(builder:
                     //     (BuildContext context, Widget child, MainModel model) {

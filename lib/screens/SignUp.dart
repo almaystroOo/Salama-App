@@ -23,12 +23,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _logoImage() {
     return Container(
-      height: 150,
+      height: 75,
       child: Image.asset('assets/logo.png'),
     );
   }
 
-  Widget _usernameField() {
+  Widget _userEmailField() {
     return TextFormField(
       validator: (value) {
         if (value.isEmpty ||
@@ -49,6 +49,34 @@ class _SignUpPageState extends State<SignUpPage> {
           icon: Icon(Icons.verified_user),
           labelText: 'Email :',
           hintText: 'Enter your email ',
+          filled: true,
+          fillColor: Colors.white24),
+    );
+  }
+
+  Widget _userNameField() {
+    return TextFormField(
+      validator: (value) {
+        if (value.isEmpty)
+        //  ||
+        //     !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+        //         .hasMatch(value))
+        {
+          return 'Enter A valid Username  ';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        print('usernamevalue =' + '$value');
+        setState(() {
+          _userData['email'] = value;
+          print(_userData['email'] + ' userdate /email');
+        });
+      },
+      decoration: InputDecoration(
+          icon: Icon(Icons.verified_user),
+          labelText: 'User name :',
+          hintText: 'Enter your user name ',
           filled: true,
           fillColor: Colors.white24),
     );
@@ -98,9 +126,9 @@ class _SignUpPageState extends State<SignUpPage> {
     final targetWidth = width > 550.0 ? 500.0 : width * 0.98;
     return Scaffold(
         body: Container(
-      decoration: BoxDecoration(
-        image: _backgroundDecoration(),
-      ),
+      decoration: BoxDecoration(color: Colors.green
+          //image: _backgroundDecoration(),
+          ),
       child: Center(
         child: SingleChildScrollView(
             padding: EdgeInsets.all(10),
@@ -109,15 +137,25 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   children: [
                     _logoImage(),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
                         width: targetWidth,
                         child: Column(
                           children: [
-                            _usernameField(),
+                            _userNameField(),
                             SizedBox(
-                              height: 5.0,
+                              height: 15.0,
+                            ),
+                            _userEmailField(),
+                            SizedBox(
+                              height: 15.0,
                             ),
                             _passwordField(),
+                            SizedBox(
+                              height: 15.0,
+                            ),
                           ],
                         )),
                     ScopedModelDescendant<MainModel>(builder:

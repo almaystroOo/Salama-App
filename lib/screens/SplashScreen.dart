@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 20,
                 ),
                 Text(
-                  'Salama App, your way to a quick statment reporting ',
+                  'Salama App, your way to a quick statment reporting',
                   style: TextStyle(
                     fontStyle: FontStyle.normal,
                     color: Colors.white,

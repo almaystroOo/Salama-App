@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ReviewPage extends StatefulWidget {
+class PreCamera extends StatefulWidget {
   @override
-  _ReviewPageState createState() => _ReviewPageState();
+  _PreCameraState createState() => _PreCameraState();
 }
 
-class _ReviewPageState extends State<ReviewPage> {
+class _PreCameraState extends State<PreCamera> {
   DecorationImage _backgroundDecoration() {
     return DecorationImage(
         image: AssetImage('assets/loginback.png'), fit: BoxFit.fill);
@@ -94,3 +94,57 @@ class _ReviewPageState extends State<ReviewPage> {
     );
   }
 }
+
+//     Container(
+//         //  height: MediaQuery.of(context).size.height / 2,
+//         color: Colors.green,
+//         child: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               // Image.asset(
+//               //   "assets/logo.png",
+//               //   height: 100,
+//               // ),
+//               SizedBox(
+//                 height: 35,
+//               ),
+//               // SpinKitFadingCircle(
+//               //   //controller: AnimationController(vsync: null),
+//               //   duration: Duration(seconds: 600),
+//               //   color: Colors.white,
+//               // ),
+//               SizedBox(
+//                 height: 20,
+//               ),
+//               Text(
+//                 ' Take five picture with your camera which covers all accident parts ! ',
+//                 style: TextStyle(
+//                   fontStyle: FontStyle.normal,
+//                   color: Colors.white,
+//                   fontSize: 15,
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 20,
+//               ),
+//               RaisedButton(
+//                 textColor: Colors.white,
+//                 color: Colors.blue,
+//                 child: Text('Next'),
+//                 onPressed: () {
+//                   Navigator.pushReplacementNamed(context, '/camera');
+//                   // Navigator.push(
+//                   //   context,
+//                   //   MaterialPageRoute(
+//                   //       builder: (context) =>
+//                   //           HomePage(/*dateData: formattedDate*/)),
+//                   // );
+//                 },
+//               )
+//             ],
+//           ),
+//         ));
+//   }
+// }
