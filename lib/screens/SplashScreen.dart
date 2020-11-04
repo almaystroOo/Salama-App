@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:meals_app/screens/LoginPage.dart';
+import 'package:scoped_model/scoped_model.dart';
+import '../ScopedModel/main.dart';
+import './Home_page.dart';
 
 class SplashScreen extends StatefulWidget {
+  Function init;
+  bool isLoggedIn;
+  SplashScreen(this.init, this.isLoggedIn);
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  _preJob() async {
+    await widget.init();
+    Navigator.pushReplacementNamed(context, '/login');
+    // return widget.isLoggedIn
+    //     ? Navigator.pushReplacementNamed(context, '/home')
+    //     : Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  @override
+  void initState() {
+    _preJob();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +46,15 @@ class _SplashScreenState extends State<SplashScreen> {
                 SizedBox(
                   height: 35,
                 ),
-                SpinKitFadingCircle(
-                  //controller: AnimationController(vsync: null),
-                  duration: Duration(seconds: 600),
-                  color: Colors.white,
+                CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  //valueColor: null,
                 ),
+                // SpinKitFadingCircle(
+                //   //controller: AnimationController(vsync: null),
+                //   //    duration: Duration(seconds: 600),
+                //   color: Colors.white,
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -40,7 +65,12 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: Colors.white,
                     fontSize: 15,
                   ),
-                )
+                ),
+                //   ScopedModelDescendant<MainModel>(builder:
+                //       (BuildContext context, Widget child, MainModel model) {
+                //     return
+                //     //HomePage() : LoginPage();
+                //   }),
               ],
             ),
           )),

@@ -52,7 +52,9 @@ class _HomePageState extends State<HomePage> {
                 child: Text('New Statement '),
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/rptstatus');
+                },
                 child: Text('Query Statement '),
                 color: Colors.green,
               ),

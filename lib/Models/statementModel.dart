@@ -10,6 +10,10 @@ class StatementFields {
   static const String partB_license = "partb_license_number";
   static const String partB_plate = "partb_car_plate";
   static const String status = "accident_status";
+  static const String city = "city";
+  static const String locality = "locality";
+  static const String firstStreet = "first_street";
+  static const String secondStreet = "second_street";
 }
 
 class Statement {
@@ -24,6 +28,10 @@ class Statement {
   String partBphone;
   String partBplate;
   String status;
+  String city;
+  String locality;
+  String firstStreet;
+  String secondStreet;
   Statement(
       {this.id,
       this.partAname,
@@ -35,7 +43,11 @@ class Statement {
       this.partBlicense,
       this.partBphone,
       this.partBplate,
-      this.status});
+      this.status,
+      this.city,
+      this.locality,
+      this.firstStreet,
+      this.secondStreet});
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data[StatementFields.id] = this.id;
@@ -49,6 +61,11 @@ class Statement {
     data[StatementFields.partB_phone] = this.partBphone;
     data[StatementFields.partB_plate] = this.partBplate;
     data[StatementFields.status] = this.status;
+    data[StatementFields.city] = this.city;
+    data[StatementFields.locality] = this.locality;
+    data[StatementFields.firstStreet] = this.firstStreet;
+    data[StatementFields.secondStreet] = this.secondStreet;
+
     return data;
   }
 }

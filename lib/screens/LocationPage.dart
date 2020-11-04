@@ -8,12 +8,12 @@ class LocationPage extends StatefulWidget {
 }
 
 class _LocationPageState extends State<LocationPage> {
-  Map<String, dynamic> _partAData = {
-    'Name': null,
-    'PhoneNumber': null,
-    'LicenseNumber': null,
-    'CarNumber': null,
-    'Date': DateTime.now().toString()
+  Map<String, dynamic> _locatinData = {
+    'city': null,
+    'locality': null,
+    'firstStreet': null,
+    'secondStreet': null,
+    // 'Date': DateTime.now().toString()
     //'acceptTerms': false
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -22,44 +22,44 @@ class _LocationPageState extends State<LocationPage> {
   Widget build(BuildContext context) {
     return Container();
   }*/
-  Widget _cityDropDown() {
-    return DropdownButton<String>(
-      hint: Text('State :'),
-      value: dropdownValue,
-      icon: Icon(Icons.arrow_downward),
-      iconSize: 24,
-      elevation: 16,
-      style: TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-      },
-      items: <String>['الخرطوم', 'بحري', 'أمدرمان'].map((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList(),
+  // Widget _cityDropDown() {
+  //   return DropdownButton<String>(
+  //     hint: Text('State :'),
+  //     value: dropdownValue,
+  //     icon: Icon(Icons.arrow_downward),
+  //     iconSize: 24,
+  //     elevation: 16,
+  //     style: TextStyle(color: Colors.deepPurple),
+  //     underline: Container(
+  //       height: 2,
+  //       color: Colors.deepPurpleAccent,
+  //     ),
+  //     onChanged: (String newValue) {
+  //       setState(() {
+  //         dropdownValue = newValue;
+  //       });
+  //     },
+  //     items: <String>['الخرطوم', 'بحري', 'أمدرمان'].map((String value) {
+  //       return DropdownMenuItem<String>(value: value, child: Text(value));
+  //     }).toList(),
 
-      //onChanged: null
-    );
-  }
+  //     //onChanged: null
+  //   );
+  // }
 
-  Widget _nameField() {
+  Widget _cityField() {
     return TextFormField(
       validator: (value) {
         if (value.isEmpty || value.length < 5) {
-          return 'Enter a valid full name';
+          return 'Enter a valid city name';
         }
         return null;
       },
       onSaved: (value) {
-        print('Name =' + '$value');
+        print('city =' + '$value');
         setState(() {
-          _partAData['Name'] = value;
-          print(_partAData['Name'] + 'Namedate /Name');
+          _locatinData['city'] = value;
+          print(_locatinData['city'] + 'city name');
         });
       },
       decoration: InputDecoration(
@@ -71,73 +71,73 @@ class _LocationPageState extends State<LocationPage> {
     );
   }
 
-  Widget _phoneNumberField() {
+  Widget _localityField() {
     return TextFormField(
       validator: (value) {
-        if (value.isEmpty || value.length < 9) {
-          return 'Enter a valid Phone Number';
+        if (value.isEmpty) {
+          return 'Enter a valid locality name';
         }
         return null;
       },
       onSaved: (value) {
-        print('Phone Number =' + '$value');
+        print('locality' + '$value');
         setState(() {
-          _partAData['PhoneNumber'] = value;
-          //   print(_partAData['Phone Number'] + 'Phone Number /Phone Number');
+          _locatinData['locality'] = value;
+          //   print(_locatinData['Phone Number'] + 'Phone Number /Phone Number');
         });
       },
       decoration: InputDecoration(
           //   icon: Icon(Icons.verified_user),
           labelText: 'locality :',
-          hintText: 'Enter the locality ',
+          hintText: 'Enter accident locality ',
           filled: true,
           fillColor: Colors.white24),
     );
   }
 
-  Widget _licenseNumberField() {
+  Widget _firstStreetField() {
     return TextFormField(
       validator: (value) {
-        if (value.isEmpty || value.length < 5) {
-          return 'Enter a valid license Number';
+        if (value.isEmpty) {
+          return 'Enter a valid first Street name';
         }
         return null;
       },
       onSaved: (value) {
-        print('License Number =' + '$value');
+        print('firstStreet' + '$value');
         setState(() {
-          _partAData['LicenseNumber'] = value;
-          //   print(_partAData['Phone Number'] + 'Phone Number /Phone Number');
+          _locatinData['firstStreet'] = value;
+          //   print(_locatinData['Phone Number'] + 'Phone Number /Phone Number');
         });
       },
       decoration: InputDecoration(
           //   icon: Icon(Icons.verified_user),
-          labelText: 'first street  Number :',
-          hintText: 'Enter the street Number ',
+          labelText: 'first street  name :',
+          hintText: 'Enter the street name ',
           filled: true,
           fillColor: Colors.white24),
     );
   }
 
-  Widget _carNumberField() {
+  Widget _secondStreetField() {
     return TextFormField(
       validator: (value) {
         if (value.isEmpty || value.length < 5) {
-          return 'Enter a valid Car Number';
+          return 'Enter a valid first street name ';
         }
         return null;
       },
       onSaved: (value) {
-        print('Car Number =' + '$value');
+        print('firstStreet=' + '$value');
         setState(() {
-          _partAData['CarNumber'] = value.trim();
-          //   print(_partAData['Car Number'] + 'Car Number /Car Number');
+          _locatinData['secondStreet'] = value;
+          //   print(_locatinData['Car Number'] + 'Car Number /Car Number');
         });
       },
       decoration: InputDecoration(
           //   icon: Icon(Icons.verified_user),
-          labelText: 'second street  Number :',
-          hintText: 'Enter your the second street  Number ',
+          labelText: 'second street name :',
+          hintText: 'Enter your the second street name ',
           filled: true,
           fillColor: Colors.white24),
     );
@@ -156,8 +156,8 @@ class _LocationPageState extends State<LocationPage> {
   //     onSaved: (value) {
   //       print('Date  =' + '$value');
   //       setState(() {
-  //         _partAData[' Date'] = value;
-  //         //   print(_partAData['Date'] + 'Date /Date');
+  //         _locatinData[' Date'] = value;
+  //         //   print(_locatinData['Date'] + 'Date /Date');
   //       });
   //     },
   //     decoration: InputDecoration(
@@ -168,16 +168,25 @@ class _LocationPageState extends State<LocationPage> {
   //         fillColor: Colors.white24),
   //   );
   // }
-  _nextButton(Function addStatementPartA, dynamic getData) {
+  _nextButton(Function addLocationDetails, Function createDocument,
+      dynamic getData) async {
     if (!_formKey.currentState.validate()) {
       return;
     }
     //  print('${_userData['email']}' + '${_userData['password']}');
     _formKey.currentState.save();
-    addStatementPartA(_partAData['Name'], _partAData['LicenseNumber'],
-        _partAData['PhoneNumber'], _partAData['CarNumber'], _partAData['Date']);
+    addLocationDetails(
+      _locatinData['city'],
+      _locatinData['locality'],
+      _locatinData['firstStreet'],
+      _locatinData['secondStreet'],
+    );
     print(getData);
-    Navigator.pushReplacementNamed(context, '/partB');
+    await createDocument();
+    createDocument().then((dynamic succes) {
+      Navigator.pushReplacementNamed(context, '/preCamera');
+    });
+    // Navigator.pushReplacementNamed(context, '/rptstatus');
   }
 
   DecorationImage _backgroundDecoration() {
@@ -220,13 +229,13 @@ class _LocationPageState extends State<LocationPage> {
                               width: targetWidth,
                               child: Column(
                                 children: [
-                                  _nameField(),
+                                  _cityField(),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  _phoneNumberField(),
-                                  _licenseNumberField(),
-                                  _carNumberField(),
+                                  _localityField(),
+                                  _firstStreetField(),
+                                  _secondStreetField(),
                                   // _cityDropDown(),
                                 ],
                               )),
@@ -238,25 +247,30 @@ class _LocationPageState extends State<LocationPage> {
                         child: Text('Next'),
                         color: Colors.white24,
                       );*/
-                            return RaisedButton(
-                              textColor: Colors.white,
-                              color: Colors.blue,
-                              child: Text('Next'),
-                              onPressed: () {
-                                print(model.getData);
-                                Navigator.pushReplacementNamed(
-                                    context, '/preCamera');
-                                // _nextButton(
-                                //     model.addStatementPartA, model.getData);
+                            return model.isLoading
+                                ? Center(child: CircularProgressIndicator())
+                                : RaisedButton(
+                                    splashColor: Colors.white,
+                                    textColor: Colors.white,
+                                    color: Colors.blue,
+                                    child: Text('Next'),
+                                    onPressed: () {
+                                      print(model.getData);
+                                      _nextButton(model.addLocationDetails,
+                                          model.createDocument, model.getData);
+                                      // Navigator.pushReplacementNamed(
+                                      //     context, '/preCamera');
+                                      // _nextButton(
+                                      //     model.addStatementPartA, model.getData);
 
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) =>
-                                //           HomePage(/*dateData: formattedDate*/)),
-                                // );
-                              },
-                            );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           HomePage(/*dateData: formattedDate*/)),
+                                      // );
+                                    },
+                                  );
                           })
 
                           // RaisedButton(

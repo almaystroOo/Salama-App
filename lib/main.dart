@@ -19,7 +19,11 @@ import 'package:camera/camera.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import './screens/submitScreen.dart';
-//import '';
+import './screens/cameraOne.dart';
+import './screens/cameraFour.dart';
+import './screens/cameraThree.dart';
+import './screens/cameraTwo.dart ';
+import './screens/imageViewer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +50,7 @@ class MyApp extends StatelessWidget {
     return ScopedModel<MainModel>(
       model: model,
       child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Salama App',
           theme: ThemeData(
             appBarTheme: AppBarTheme(
               centerTitle: true,
@@ -77,15 +81,24 @@ class MyApp extends StatelessWidget {
             '/partB': (context) => PartBPage(),
             '/location': (context) => LocationPage(),
             '/Camera': (context) => TakePictureScreen(camera: firstCamera),
+            '/cameraOne': (context) =>
+                TakeOnePictureScreen(camera: firstCamera),
+            '/cameraTwo': (context) =>
+                TakeTwoPictureScreen(camera: firstCamera),
+            '/cameraThree': (context) =>
+                TakeThirdPictureScreen(camera: firstCamera),
+            '/cameraFour': (context) =>
+                TakeFourthPictureScreen(camera: firstCamera),
             '/review': (context) => ReviewPage(),
-            '/sigUp': (context) => SignUpPage(),
+            '/signUp': (context) => SignUpPage(),
             '/preCamera': (context) => PreCamera(),
             '/submit': (context) => SubmitPage(),
+            '/imageViewer': (context) => ImageViewer()
           },
           home: ScopedModelDescendant<MainModel>(
               builder: (BuildContext context, Widget child, MainModel model) {
-            model.init();
-            return model.isLoggedIn ? HomePage() : SubmitPage();
+            //  return LocationPage();
+            return SplashScreen(model.init, model.isLoggedIn);
           }),
           onUnknownRoute: (RouteSettings settings) {
             return MaterialPageRoute(

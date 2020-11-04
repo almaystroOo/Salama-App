@@ -1,25 +1,26 @@
-// import 'package:flutter/foundation.dart';
-// void main() {
-//   var _myMap = {
-//     "id": "jay",
-//     "password": "1234",
-//     "name": "Jay Tillu",
-//   };
-//   print("************ Before adding data in Map ************");
-//   print(_myMap);
+import 'dart:io';
+import 'package:appwrite/appwrite.dart';
 
-//   //  Map<String, dynamic> get getData {
-//   //   return _myMap;
-//   // }
-//   // Adding value to Map
+void main() {
+  // Init SDK
+  Client client = Client();
+  Storage storage = Storage(client);
 
-//   _myMap["country"] = "india";
-//   print("************ After adding data in Map ************");
-//   print(_myMap);
-// }
+  client
+          .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+          .setProject('5df5acd0d48c2') // Your project ID
+      ;
 
-// // Output
-// // ************ Before adding data in Map ************
-// // {id: jay, password: 1234, name: Jay Tillu}
-// // ************ After adding data in Map ************
-// // {id: jay, password: 1234, name: Jay Tillu, country: india}
+  Future result = storage.createFile(
+    file:
+        await MultipartFile.fromFile('./path-to-files/image.jpg', 'image.jpg'),
+    read: [],
+    write: [],
+  );
+
+  result.then((response) {
+    print(response);
+  }).catchError((error) {
+    print(error.response);
+  });
+}

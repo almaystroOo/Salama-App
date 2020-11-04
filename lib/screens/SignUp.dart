@@ -84,6 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _passwordField() {
     return TextFormField(
+      obscureText: true,
       validator: (value) {
         if (value.isEmpty || value.length <= 6) {
           return 'passsword required and not to be less than six characters';
@@ -111,10 +112,13 @@ class _SignUpPageState extends State<SignUpPage> {
     }
     _formKey.currentState.save();
     print('${_userData['email']}' + '${_userData['password']}');
-    await createAccount(_userData['email'], _userData['password']);
-    print(isCreated);
-    // if (isCreated) {
-    Navigator.pushReplacementNamed(context, '/home');
+    await createAccount(_userData['email'], _userData['password'])
+        .then((dynamic done) {
+      print(isCreated);
+      // if (isCreated) {
+      Navigator.pushReplacementNamed(context, '/login');
+    });
+
     // }
 
     //IMPLEMENT LOGIN FUCTION AND PUSH PAGE
@@ -166,7 +170,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text('SignUp'),
                         color: Colors.white24,
                       );
-                    })
+                    }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
+                        child: Text(
+                          'login',
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        ))
                   ],
                 ))),
       ),

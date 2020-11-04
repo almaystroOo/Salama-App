@@ -7,10 +7,10 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import '../ScopedModel/main.dart';
 
-class TakePictureScreen extends StatefulWidget {
+class TakeFourthPictureScreen extends StatefulWidget {
   final CameraDescription camera;
 
-  const TakePictureScreen({
+  const TakeFourthPictureScreen({
     Key key,
     @required this.camera,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class TakePictureScreen extends StatefulWidget {
   TakePictureScreenState createState() => TakePictureScreenState();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
+class TakePictureScreenState extends State<TakeFourthPictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
 
@@ -49,7 +49,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Take first picture')),
+      appBar: AppBar(title: Text('Take the Fifth picture')),
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
@@ -114,11 +114,11 @@ class DisplayPictureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print(imagePath);
     return Scaffold(
-        appBar: AppBar(title: Text('Display first statment Picture')),
+        appBar: AppBar(title: Text('Display Fifth statment Picture')),
         floatingActionButton: FloatingActionButton(
             child: Text('Next picture'),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/cameraOne');
+              Navigator.pushReplacementNamed(context, '/submit');
             }),
         // The image is stored as a file on the device. Use the `Image.file`
         // constructor with the given path to display the image.

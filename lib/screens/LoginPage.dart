@@ -7,9 +7,9 @@ import 'dart:async';
 import '../Models/userModel.dart';
 
 class LoginPage extends StatefulWidget {
-  final Function login;
+  //final Function login;
 
-  const LoginPage({Key key, this.login}) : super(key: key);
+  //const LoginPage({Key key, this.login}) : super(key: key);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _passwordField() {
     return TextFormField(
-      obscureText: false,
+      obscureText: true,
       validator: (value) {
         if (value.isEmpty || value.length <= 6) {
           return 'passsword required and not to be less than six characters';
@@ -87,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
     Function login,
     bool isLoggedIn,
     bool isLoading,
-    // String userId,
     String userId,
+    // String userId,
     String doneMsg,
   ) async {
     if (!_formKey.currentState.validate()) {
@@ -98,13 +98,17 @@ class _LoginPageState extends State<LoginPage> {
     _formKey.currentState.save();
     print(isLoggedIn);
     print('print first is loading ' + '$isLoading');
-    await login(_userData['email'], _userData['password']);
-    print('second is logged :' + '"$isLoggedIn');
-    //print('User id :' + userId);
-    // print(isDone);
-    // if (isLoggedIn) {
-    // print('done msg in login[page]: ' + doneMsg);
-    Navigator.pushReplacementNamed(context, '/home');
+    login(_userData['email'], _userData['password']).then((dynamic done) {
+      print('$userId' + 'from login page :');
+      Navigator.pushReplacementNamed(context, '/home');
+    });
+    // print(login);
+    // print('second is logged :' + '"$isLoggedIn');
+    // //print('User id :' + userId);
+    // // print(isDone);
+    // // if (isLoggedIn) {
+    // // print('done msg in login[page]: ' + doneMsg);
+    // Navigator.pushReplacementNamed(context, '/home');
     // }
     // else {
     // Scaffold.of(context).showSnackBar(SnackBar(content: Text('doneMsg')));
@@ -189,7 +193,19 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    _creatAccountButton()
+                    _creatAccountButton(),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/signUp');
+                        },
+                        child: Text(
+                          'create account ',
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        ))
                     // ScopedModelDescendant<MainModel>(builder:
                     //     (BuildContext context, Widget child, MainModel model) {
                     //   return RaisedButton();
